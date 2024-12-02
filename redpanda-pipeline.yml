@@ -1,0 +1,21 @@
+input:
+  nats:
+    subject: "sensor_data"
+    urls:
+      - "YOUR-NATS-PUBLIC-IP-NGROK"
+pipeline:
+  processors:
+    - mutation: |
+        root.title = "PRIVATE AND CONFIDENTIAL"
+
+output:
+  kafka_franz:
+    seed_brokers:
+      - YOUR-BOOTSTRAP-SERVER-URL
+    topic: "iot-stream"
+    tls:
+      enabled: true
+    sasl:
+      - mechanism: SCRAM-SHA-256
+        username: "YOUR-REDPANDA-USERNAME" # Replace with your Redpanda username
+        password: "YOUR-REDPANDA-PASSWORD" # Replace with your Redpanda password
