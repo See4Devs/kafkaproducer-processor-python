@@ -3,7 +3,7 @@ import boto3
 import json
 import time
 
-# Kafka Consumer Configuration
+# Kafka consumer configuration
 consumer = KafkaConsumer(
     'iot-stream',
     bootstrap_servers="YOUR-BOOTSTRAP-SERVER-URL",
@@ -15,7 +15,7 @@ consumer = KafkaConsumer(
     ssl_cafile=None
 )
 
-# AWS Timestream Configuration
+# AWS Timestream configuration
 timestream = boto3.client('timestream-write', region_name="YOUR-AWS-REGION", aws_access_key_id="YOUR-AWS-KEY-ID", aws_secret_access_key="YOUR-AWS-ACESS-KEY")
 
 # Define the Timestream database and table
@@ -36,7 +36,7 @@ def classify_environment(temperature, humidity):
 # Function to write data to Timestream
 def write_to_timestream(message):
     max_retries = 3
-    retry_interval = 1  # in seconds
+    retry_interval = 1  # In seconds
 
     try:
         payload = json.loads(message.value)
